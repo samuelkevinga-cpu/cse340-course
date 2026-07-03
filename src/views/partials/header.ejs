@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <%= title %></title>
-    <link rel="stylesheet" href="/css/main.css">
+    <%# The title variable comes from the route in server.js, so each page can set its own browser tab title. %>
+        <title>
+            <%= title %>
+        </title>
+        <link rel="stylesheet" href="/css/main.css">
 </head>
+
 <body>
     <nav>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/organizations">Organizations</a></li>
-            <li><a href="/projects">Projects</a></li>
+            <%# These links appear on every page because this shared header partial is included by every EJS page. %>
+                <li><a href="/">Home</a></li>
+                <li><a href="/organizations">Organizations</a></li>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/categories">Categories</a></li>
         </ul>
     </nav>
