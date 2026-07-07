@@ -11,9 +11,15 @@ import { Pool } from 'pg';
  * The connection string format is:
  * postgresql://username:password@host:port/database
  */
+const connectionString = process.env.DB_URL || process.env.DATABASE_URL;
+
+if (!connectionString) {
+    throw new Error('Database connection string is not configured. Set DB_URL or DATABASE_URL.');
+}
+
 const pool = new Pool({
-    connectionString: process.env.DB_URL,
-    ssl: true
+    connectionString,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
 /**

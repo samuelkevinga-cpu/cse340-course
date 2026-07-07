@@ -25,8 +25,14 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/organizations', async (req, res) => {
-    const organizations = await getAllOrganizations();
     const title = 'Our Partner Organizations';
+    let organizations = [];
+
+    try {
+        organizations = await getAllOrganizations();
+    } catch (error) {
+        console.error('Failed to load organizations:', error);
+    }
 
     res.render('organizations', { title, organizations });
 });
