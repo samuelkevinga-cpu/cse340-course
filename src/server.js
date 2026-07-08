@@ -2,6 +2,7 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import { getAllOrganizations } from './models/organizations.js';
+import { getAllProjects } from './models/projects.js';
 import { testConnection } from './models/db.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
@@ -39,7 +40,16 @@ app.get('/organizations', async (req, res) => {
 
 app.get('/projects', async (req, res) => {
     const title = 'Service Projects';
-    res.render('projects', { title });
+    let projects = [];
+
+    try {
+        projects = await getAllProjects();
+        console.log('Loaded projects:', projects.length);
+    } catch (error) {
+        console.error('Failed to load projects:', error);
+    }
+
+    res.render('projects', { title, projects });
 });
 
 app.get('/categories', async (req, res) => {

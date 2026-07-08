@@ -1,0 +1,1 @@
+Week 01 in CSE 340 is primarily project/setup work and does not require database SQL queries. But i want to keep this folder so it will look good when i see all the weeks folders. 🥴
