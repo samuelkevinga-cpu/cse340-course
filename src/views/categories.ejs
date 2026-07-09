@@ -1,18 +1,19 @@
 <%- include('partials/header') %>
 
     <main>
-        <%# The page title is provided by the /categories route in server.js. %>
-            <h1>
-                <%= title %>
-            </h1>
+        <h1>
+            <%= title %>
+        </h1>
 
-            <%# This section contains only the placeholder categories required by the assignment. %>
-                <ul>
-                    <li>Environmental</li>
-                    <li>Educational</li>
-                    <li>Community Service</li>
-                    <li>Health and Wellness</li>
-                </ul>
+        <% if (!categories || categories.length === 0) { %>
+            <p>No categories are available right now.</p>
+        <% } else { %>
+            <ul>
+                <% categories.forEach((category) => { %>
+                    <li><%= category.name %></li>
+                <% }) %>
+            </ul>
+        <% } %>
     </main>
 
     <%- include('partials/footer') %>

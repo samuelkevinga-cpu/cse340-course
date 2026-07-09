@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { getAllOrganizations } from './models/organizations.js';
 import { getAllProjects } from './models/projects.js';
+import { getAllCategories } from './models/categories.js';
 import { testConnection } from './models/db.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
@@ -44,7 +45,6 @@ app.get('/projects', async (req, res) => {
 
     try {
         projects = await getAllProjects();
-        console.log('Loaded projects:', projects.length);
     } catch (error) {
         console.error('Failed to load projects:', error);
     }
@@ -54,7 +54,15 @@ app.get('/projects', async (req, res) => {
 
 app.get('/categories', async (req, res) => {
     const title = 'Categories';
-    res.render('categories', { title });
+    let categories = [];
+
+    try {
+        categories = await getAllCategories();
+    } catch (error) {
+        console.error('Failed to load categories:', error);
+    }
+
+    res.render('categories', { title, categories });
 });
 
 app.listen(PORT, async () => {

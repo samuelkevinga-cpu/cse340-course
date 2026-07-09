@@ -49,3 +49,43 @@ VALUES
   (14, 3, 'Homeless Shelter Support', 'Serve meals and organize donations at the local shelter.', 'Hope Street Shelter', '2026-10-06'),
   (15, 3, 'Back-to-School Supply Drive', 'Assemble and hand out school supply kits for students.', 'UnityServe Warehouse', '2026-10-20')
 ON CONFLICT (project_id) DO NOTHING;
+
+-- Service Project Categories (Week 02 Assignment)
+-- A project can belong to many categories, and a category can belong to many projects.
+CREATE TABLE IF NOT EXISTS public.category (
+  category_id INTEGER PRIMARY KEY,
+  name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS public.project_category (
+  project_id INTEGER NOT NULL REFERENCES public.service_project (project_id) ON DELETE CASCADE,
+  category_id INTEGER NOT NULL REFERENCES public.category (category_id) ON DELETE CASCADE,
+  PRIMARY KEY (project_id, category_id)
+);
+
+INSERT INTO public.category (category_id, name)
+VALUES
+  (1, 'Construction'),
+  (2, 'Food & Agriculture'),
+  (3, 'Education'),
+  (4, 'Community Service')
+ON CONFLICT (category_id) DO NOTHING;
+
+INSERT INTO public.project_category (project_id, category_id)
+VALUES
+  (1, 1), (1, 4),
+  (2, 1), (2, 4),
+  (3, 1), (3, 4),
+  (4, 1),
+  (5, 1), (5, 4),
+  (6, 2), (6, 3),
+  (7, 2), (7, 4),
+  (8, 2), (8, 3),
+  (9, 2), (9, 3),
+  (10, 2), (10, 3),
+  (11, 4),
+  (12, 2), (12, 4),
+  (13, 4),
+  (14, 4),
+  (15, 3), (15, 4)
+ON CONFLICT (project_id, category_id) DO NOTHING;

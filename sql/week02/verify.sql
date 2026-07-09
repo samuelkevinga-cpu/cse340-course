@@ -31,3 +31,17 @@ LEFT JOIN public.service_project p
 GROUP BY o.organization_id, o.name
 ORDER BY o.organization_id;
 
+-- Categories
+SELECT category_id, name
+FROM public.category
+ORDER BY name;
+
+-- Project-category links (many-to-many)
+SELECT
+  p.title,
+  c.name AS category_name
+FROM public.project_category pc
+JOIN public.service_project p ON p.project_id = pc.project_id
+JOIN public.category c ON c.category_id = pc.category_id
+ORDER BY p.title, c.name;
+
