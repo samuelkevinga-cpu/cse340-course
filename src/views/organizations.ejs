@@ -14,7 +14,9 @@
                         <li>
                             <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
                             <strong>
-                                <%= organization.name %>
+                                <a href="/organization/<%= organization.organization_id %>">
+                                    <%= organization.name %>
+                                </a>
                             </strong>: <%= organization.contact_email %>
                                 <p>
                                     <%= organization.description %>

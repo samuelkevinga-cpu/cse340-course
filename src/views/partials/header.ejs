@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%# The title variable comes from the route in server.js, so each page can set its own browser tab title. %>
-        <title>
+    <title>
             <%= title %>
         </title>
         <link rel="stylesheet" href="/css/main.css">
@@ -14,7 +13,6 @@
 <body>
     <nav>
         <ul>
-            <%# These links appear on every page because this shared header partial is included by every EJS page. %>
                 <li><a href="/">Home</a></li>
                 <li><a href="/organizations">Organizations</a></li>
                 <li><a href="/projects">Projects</a></li>
