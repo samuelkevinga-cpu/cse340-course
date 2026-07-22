@@ -43,6 +43,8 @@
     <% } else { %>
         <p><strong>Categories:</strong> None assigned yet.</p>
     <% } %>
+
+    <p><a href="/edit-project/<%= project.project_id %>">Edit Project</a></p>
     <p><a href="/assign-categories/<%= project.project_id %>">Assign Categories</a></p>
 </main>
 
