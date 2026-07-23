@@ -24,7 +24,21 @@ const projectValidation = [
         .isLength({ max: 200 }).withMessage('Location must be less than 200 characters'),
     body('date')
         .notEmpty().withMessage('Date is required')
-        .isISO8601().withMessage('Date must be a valid date format'),
+        //Date must be between today and 5 years from now
+        .isISO8601().withMessage('Date must be a valid date format')
+        .custom((value) => {
+            const inputDate = new Date(value + 'T00:00:00');
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const fiveYearsFromNow = new Date(today);
+            fiveYearsFromNow.setFullYear(today.getFullYear() + 5);
+
+            if (inputDate < today || inputDate > fiveYearsFromNow) {
+                throw new Error('Date must be between today and 5 years from now');
+            }
+            return true;
+        }),
     body('organizationId')
         .notEmpty().withMessage('Organization is required')
         .isInt().withMessage('Organization must be a valid integer')
